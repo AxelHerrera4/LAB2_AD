@@ -22,7 +22,7 @@ def enviar_comando(comando):
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         client_socket.connect(('localhost', 12345))
         client_socket.send(comando.encode('utf-8'))
-        respuesta = client_socket.recv(4096).decode('utf-8')
+        respuesta = client_socket.recv(1024).decode('utf-8')
         client_socket.close()
         return json.loads(respuesta)
     except ConnectionRefusedError:
@@ -44,26 +44,42 @@ while True:
         materia = input("Materia (NRC): ")
         calif = input("Calificación (0-20): ")
         res = enviar_comando(f"AGREGAR|{id_est}|{nombre}|{materia}|{calif}")
-        # Mostrar respuesta en JSON
-        print(json.dumps(res, indent=4, ensure_ascii=False))
+        print(f"\n✓ {res['mensaje']}" if res['status'] == 'ok' else f"\n✗ {res['mensaje']}")
         
     elif opcion == "2":
         print("\n--- Buscar por ID ---")
         id_est = input("ID: ")
         res = enviar_comando(f"BUSCAR|{id_est}")
-        print(json.dumps(res, indent=4, ensure_ascii=False))
+        if res["status"] == "ok":
+            print(f"\n📋 Información del Estudiante:")
+            print(f"   ID: {res['data']['ID_Estudiante']}")
+            print(f"   Nombre: {res['data']['Nombre']}")
+            print(f"   Materia: {res['data']['Materia']}")
+            print(f"   Calificación: {res['data']['Calificacion']}")
+        else:
+            print(f"\n✗ {res['mensaje']}")
             
     elif opcion == "3":
         print("\n--- Actualizar Calificación ---")
         id_est = input("ID: ")
         nueva_calif = input("Nueva calificación (0-20): ")
         res = enviar_comando(f"ACTUALIZAR|{id_est}|{nueva_calif}")
-        print(json.dumps(res, indent=4, ensure_ascii=False))
+        print(f"\n✓ {res['mensaje']}" if res['status'] == 'ok' else f"\n✗ {res['mensaje']}")
         
     elif opcion == "4":
         print("\n--- Lista de Calificaciones ---")
         res = enviar_comando("LISTAR")
-        print(json.dumps(res, indent=4, ensure_ascii=False))
+        if res["status"] == "ok":
+            if len(res["data"]) == 0:
+                print("No hay registros en el sistema.")
+            else:
+                print(f"\nTotal de registros: {len(res['data'])}\n")
+                print(f"{'ID':<10} {'Nombre':<20} {'Materia':<10} {'Calificación':<12}")
+                print("-" * 55)
+                for row in res["data"]:
+                    print(f"{row['ID_Estudiante']:<10} {row['Nombre']:<20} {row['Materia']:<10} {row['Calificacion']:<12}")
+        else:
+            print(f"\n✗ {res['mensaje']}")
             
     elif opcion == "5":
         print("\n--- Eliminar Registro ---")
@@ -71,7 +87,7 @@ while True:
         confirmacion = input(f"¿Está seguro de eliminar el registro {id_est}? (s/n): ")
         if confirmacion.lower() == 's':
             res = enviar_comando(f"ELIMINAR|{id_est}")
-            print(json.dumps(res, indent=4, ensure_ascii=False))
+            print(f"\n✓ {res['mensaje']}" if res['status'] == 'ok' else f"\n✗ {res['mensaje']}")
         else:
             print("\nOperación cancelada.")
         

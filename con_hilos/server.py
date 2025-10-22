@@ -4,22 +4,17 @@ import json
 import os
 import threading
 
-ARCHIVO_CSV = '../calificaciones.csv'
+ARCHIVO_CSV = 'calificaciones.csv'
 
 def inicializar_csv():
-    """
-    Verifica si el archivo CSV existe y, si no, lo crea con los headers iniciales.
-    """
+
     if not os.path.exists(ARCHIVO_CSV):
         with open(ARCHIVO_CSV, 'w', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
             writer.writerow(['ID_Estudiante', 'Nombre', 'Materia', 'Calificacion'])
 
 def consultar_nrc(nrc):
-    """
-    Consulta el servidor de NRCs para validar si una materia/NRC es válida.
-    Retorna el resultado de la validación.
-    """
+
     try:
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         client_socket.connect(('localhost', 12346))
@@ -33,9 +28,7 @@ def consultar_nrc(nrc):
         return {"status": "error", "mensaje": f"Error consultando NRC: {str(e)}"}
 
 def agregar_calificacion(id_est, nombre, materia, calif):
-    """
-    Agrega una nueva fila al CSV con validación de NRC.
-    """
+
     # Validar NRC primero
     res_nrc = consultar_nrc(materia)
     if res_nrc["status"] != "ok":
