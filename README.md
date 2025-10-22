@@ -45,12 +45,12 @@ git clone https://github.com/AxelHerrera4/LAB2_AD
 cd SistemaDistribuido-Calificaciones
 ```
 
-## Pasos de ejecución
+## Pasos de ejecución Parte 2
 
 ### 1. Iniciar el servidor
 
-Ejecuta el servidor (secuencial o concurrente) según tu necesidad.
-![Iniciar Servidor](ruta/de/imagen_servidor.png)
+Ejecutar el servidor
+![Iniciar Servidor] (imgenes/imagen_servidor.png)
 
 ```bash
 # Servidor secuencial
@@ -65,7 +65,7 @@ python server.py
 ### 2. Conexión de los clientes
 
 Cada cliente se ejecuta en una terminal independiente y se conecta al servidor.
-![Conexión de Clientes](ruta/de/imagen_clientes.png)
+![Conexión de Clientes](imgenes/clienteH.png)
 
 ```bash
 python client.py
@@ -74,7 +74,7 @@ python client.py
 ### 3. Ejecutar el servidor de NRC
 
 El servidor de NRC valida los NRC antes de registrar o actualizar calificaciones.
-![Servidor NRC](ruta/de/imagen_nrc.png)
+![Servidor NRC](imgenes/nrcserver.png)
 
 ```bash
 python nrcs_server.py
@@ -82,4 +82,4 @@ python nrcs_server.py
 
 ## Ejemplo de uso
 
-![Ejemplo](ruta/de/otra/imagen.png)
+![Ejemplo](imgenes/ejecucionH.png)
