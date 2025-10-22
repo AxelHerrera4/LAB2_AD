@@ -149,7 +149,7 @@ python client.py
 |--------------|-------------|
 | ![](imagenes/imagen_servidor.png) | Ejecucion del servidor  |
 | ![](imagenes/nrcserver.png) | Ejecucion del servidor NRC |
-| ![](imagenes/cliente.png) | Ejecucion de los clientes y funcionamiento correcto del agregar|
+| ![](imagenes/clienteH.png) | Ejecucion de los clientes y funcionamiento correcto del agregar|
 | ![](imagenes/eliminar.png) | Eliminar calificacion |
 | ![](imagenes/actualizar.png) | Actualizar calificacion |
 | ![](imagenes/ejecucionH.png) | Ejecucion de pruebas de validaciones |
