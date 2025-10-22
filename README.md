@@ -37,15 +37,15 @@ laboratorio_2/
 git clone https://github.com/AxelHerrera4/LAB2_AD
 cd SistemaDistribuido-Calificaciones
 
-2. Ejecutar el servidor secuencial (sin hilos)
+### 2. Ejecutar el servidor secuencial (sin hilos)
 
 cd sin_hilos
 python server.py
 
-3. Ejecutar el cliente
+### 3. Ejecutar el cliente
 python client.py
 
-4. Ejecutar el servidor concurrente (con hilos)
+### 4. Ejecutar el servidor concurrente (con hilos)
 cd ../con_hilos
 python server.py
 
@@ -56,11 +56,25 @@ Ejecutar el servidor de NRC
 python nrcs_server.py
 
 
-## Pasos de ejecución
+## Parte 2 del laboratorio
 
 ### 1. Iniciar el servidor
-Ejecuta el servidor (con hilos) .  
-![Iniciar Servidor](/imagen/imagen_servidor.png) 
+Ejecuta el servidor (con hilos).  
+![Iniciar Servidor](imagenes/imagen_servidor.png)
+
+### Recursos (imágenes)
+Las imágenes usadas en este README se encuentran en la carpeta `imagenes/` en la raíz del proyecto. Usa rutas relativas desde la raíz del repositorio para que se muestren correctamente en GitHub y en vistas locales. Ejemplos:
+
+- `imagenes/imagen_servidor.png` — captura para iniciar el servidor concurrente.
+- `imagenes/nrcserver.png` — captura del servidor NRC.
+
+
+
+
+
+
+
+
 
 
 
