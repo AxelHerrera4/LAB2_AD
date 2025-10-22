@@ -1,8 +1,36 @@
 # SistemaDistribuido-Calificaciones
 
-![Portada](ruta/de/tu/imagen.png)
 
 SistemaDistribuido-Calificaciones es una aplicación distribuida en Python para el registro de calificaciones finales de estudiantes. Utiliza **sockets TCP**, archivos **CSV** para persistencia de datos y soporta concurrencia mediante **hilos**. Incluye un servidor adicional de NRC para validar materias antes de registrar calificaciones.
+
+## Introducción
+
+Este proyecto se enmarca en el ámbito de aplicaciones distribuidas, donde múltiples procesos pueden ejecutarse de manera concurrente y comunicarse entre sí. Se implementa un sistema cliente-servidor para el registro de calificaciones de estudiantes, haciendo uso de archivos CSV para la persistencia de datos.
+
+**Conceptos clave:** Concurrencia, Teorema CAP (Consistencia, Disponibilidad, Tolerancia a particiones).
+
+## Objetivos
+
+**General:** Implementar un sistema cliente-servidor con persistencia y validación inter-servidor.
+
+**Específicos:**
+
+* Manejar múltiples clientes simultáneamente.
+* Persistencia de datos en CSV.
+* Validación de NRC mediante servidor externo.
+
+## Metodología
+
+* **Lenguaje y herramientas:** Python (`socket`, `threading`, `csv`).
+* **Diseño modular:** Funciones separadas para conexión de clientes, registro en CSV y validación de NRC.
+* **Manejo de fallos:** Reenvío a servidores libres, chequeos de integridad de datos.
+
+**Flujo de operación:**
+| Visualizador | Descripción |
+|--------------|-------------|
+| ![](imagenes/a10.png) |Flujo de operacion  |
+
+
 
 ## Características principales
 
@@ -45,41 +73,96 @@ git clone https://github.com/AxelHerrera4/LAB2_AD
 cd SistemaDistribuido-Calificaciones
 ```
 
-## Pasos de ejecución Parte 2
+## Pasos de ejecución Parte 1
 
-### 1. Iniciar el servidor
+### 1. Iniciar el servidor, servidor de los NRCs y clientes
 
-Ejecutar el servidor
-![Iniciar Servidor] (imgenes/imagen_servidor.png)
+Ejecutar servidor principal
 
 ```bash
+
 # Servidor secuencial
-cd sin_hilos
+cd ../sin_hilos
 python server.py
+
+```
+
+Ejecutar Clientes
+
+```bash
+
+# Servidor concurrente
+cd ../sin_hilos
+python client.py
+
+```
+
+##  Evidencias 
+
+| Visualizador | Descripción |
+|--------------|-------------|
+| ![](imagenes/a1.png) |Agregar Clientes  |
+| ![](imagenes/a2.png) | Listar Calificaciones |
+| ![](imagenes/a3.png) | Buscar por ID |
+| ![](imagenes/a4.png) | Actualizacion de calificacion |
+| ![](imagenes/a5.png) | Eliminar ID |
+
+
+
+## Pasos de ejecución Parte 2
+
+### 1. Iniciar el servidor, servidor de los NRCs y clientes
+
+Ejecutar servidor principal
+
+```bash
 
 # Servidor concurrente
 cd ../con_hilos
 python server.py
+
 ```
 
-### 2. Conexión de los clientes
-
-Cada cliente se ejecuta en una terminal independiente y se conecta al servidor.
-![Conexión de Clientes](imgenes/clienteH.png)
+Ejecutar servidor NRCs
 
 ```bash
+
+# Servidor concurrente
+cd ../con_hilos
+python nrc_server.py
+
+```
+
+Ejecutar Clientes
+
+```bash
+
+# Servidor concurrente
+cd ../con_hilos
 python client.py
+
 ```
 
-### 3. Ejecutar el servidor de NRC
+##  Evidencias 
 
-El servidor de NRC valida los NRC antes de registrar o actualizar calificaciones.
-![Servidor NRC](imgenes/nrcserver.png)
+| Visualizador | Descripción |
+|--------------|-------------|
+| ![](imagenes/imagen_servidor.png) | Ejecucion del servidor  |
+| ![](imagenes/nrcserver.png) | Ejecucion del servidor NRC |
+| ![](imagenes/cliente.png) | Ejecucion de los clientes y funcionamiento correcto del agregar|
+| ![](imagenes/eliminar.png) | Eliminar calificacion |
+| ![](imagenes/actualizar.png) | Actualizar calificacion |
+| ![](imagenes/ejecucionH.png) | Ejecucion de pruebas de validaciones |
 
-```bash
-python nrcs_server.py
-```
 
-## Ejemplo de uso
+## Conclusiones
 
-![Ejemplo](imgenes/ejecucionH.png)
+* Desafíos: comunicación entre servidores y concurrencia.
+* Lecciones: importancia de modularidad y manejo de hilos.
+* Mejoras futuras: uso de bases de datos y balanceador de carga.
+
+## Bibliografía
+
+* Documentación Python: [`socket`](https://docs.python.org/3/library/socket.html), [`threading`](https://docs.python.org/3/library/threading.html), [`csv`](https://docs.python.org/3/library/csv.html)
+* Gilbert, S., & Lynch, N. (2002). *Brewer’s Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services.*
+* Artículos sobre aplicaciones distribuidas y Teorema CAP.
