@@ -2,7 +2,7 @@ import socket
 import csv
 import json
 import os
-ARCHIVO_CSV = '../calificaciones.csv'
+ARCHIVO_CSV = 'calificaciones.csv'
 
 def inicializar_csv():
     if not os.path.exists(ARCHIVO_CSV):
